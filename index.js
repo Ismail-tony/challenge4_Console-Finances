@@ -87,12 +87,38 @@ var finances = [
   ['Feb-2017', 671099],
 ];
 
-/*=========================================*\
+/*==========================================================*\
   The total Number of Months in the Dataset
-\*=========================================*/
+\*==========================================================*/
 
 console.log("Financial Analysis");
 console.log("--------------------");
 
-let total_months = finances.length
+const total_months = finances.length
 console.log("Total Months", total_months);
+
+/*=============================================================*\
+  The net total amount of Profit/Losses over the entire period.
+\*=============================================================*/
+//Using the .reduce Acumulator method to return a single value
+initiaValue = 0
+const total_profit_loss = finances.reduce((accumulator, currentValue) => accumulator + currentValue[1], initiaValue)
+console.log("Total: $", + total_profit_loss);
+
+/*=====================================================================*\
+  The average of the changes in Profit/Losses over the entire period.
+\*=====================================================================*/
+//total change in profit from month to month
+let total_change = 0;
+
+for (let i = 1; i < finances.length; i++) {
+  const current_month_change = finances[i][1];
+  const previous_month_change = finances[i - 1][1];
+  const change = current_month_change - previous_month_change;
+  total_change += change;
+}
+let average_change = total_change / (total_months - 1);
+console.log('Average Change: $', average_change.toFixed(2));
+
+const finance_array = finances.map((el) => el[1]);
+console.log(finance_array);
